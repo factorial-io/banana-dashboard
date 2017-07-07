@@ -1,0 +1,186 @@
+<?php
+
+/**
+ * @file
+ * Banana Dashboard.
+ * @TODO: icons should be swapable + some other approach then classes
+ * @TODO: create example yaml
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function banana_dashboard_menu() {
+  $items = array();
+
+  $dashboard = banana_dashboard_get('dashboard');
+  if (!empty($dashboard)) {
+    $items[$dashboard['url']] = array(
+      'title' => $dashboard['title'],
+      'page callback' => 'banana_dashboard_page_callback',
+      'access arguments' => $dashboard['access arguments'],
+      'type' => MENU_NORMAL_ITEM,
+      'weight' => -100000,
+      'options' => array(
+        'attributes' => array(
+          'class' => 'icon-banana-dashboard',
+        ),
+      ),
+    );
+  }
+
+  $settings_form = banana_dashboard_get('settings_form');
+  if (!empty($settings_form)) {
+    $items[$settings_form['url']] = array(
+      'title' => $settings_form['title'],
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('banana_dashboard_admin'),
+      'access arguments' => $settings_form['access arguments'],
+      'type' => MENU_NORMAL_ITEM,
+    );
+  }
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function banana_dashboard_permission() {
+  $settings_form = banana_dashboard_get('settings_form');
+  if (isset($settings_form['permission_name'])) {
+    return array(
+      $settings_form['permission_name'] => array(
+        'title' => $settings_form['permission_title'],
+      ),
+    );
+  }
+  else {
+    return array();
+  }
+}
+
+/**
+ * Callback for hook_menu() entry.
+ */
+function banana_dashboard_page_callback() {
+  $path = drupal_get_path('module', 'banana_dashboard');
+  drupal_add_css($path . '/css/banana_dashboard.css');
+  $dashboard_menu = banana_dashboard_get('dashboard_menu', array());
+  foreach ($dashboard_menu as $key => $value) {
+    if ($value['url'] == FALSE || !drupal_valid_path(substr($value['url'], 1))) {
+      unset($dashboard_menu[$key]);
+    }
+  }
+  return theme('banana_dashboard', array('dashboard_menu' => $dashboard_menu));
+}
+
+/**
+ * Return system settings form.
+ */
+function banana_dashboard_admin() {
+  $form = array();
+  $settings_form = banana_dashboard_get('settings_form');
+  if (!empty($settings_form['variables'])) {
+    $form = $settings_form['variables'];
+    foreach ($form as $key => $value) {
+      if (isset($value['#default_value'])) {
+        $form[$key]['#default_value'] = variable_get($key, $form[$key]['#default_value']);
+      }
+      else {
+        $form[$key]['#default_value'] = variable_get($key);
+      }
+    }
+  }
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function banana_dashboard_theme($existing, $type, $theme, $path) {
+  return array(
+    'banana_dashboard' => array(
+      'template' => 'banana_dashboard',
+      'variables' => array('dashboard_menu' => array()),
+    ),
+  );
+}
+
+/**
+ * Get one config value.
+ */
+function banana_dashboard_get($name, $default_value = NULL) {
+  $data = banana_dashboard_load_config();
+  return isset($data[$name]) ? $data[$name] : $default_value;
+}
+
+/**
+ * Load config from yml.
+ */
+function banana_dashboard_load_config() {
+  $data = &drupal_static(__FUNCTION__);
+  if (!isset($data)) {
+    $data = array();
+    $path = drupal_get_path('module', 'banana_dashboard');
+    if ($path) {
+      $filepath = $path . '/banana_dashboard.yaml';
+      drupal_alter('banana_dashboard_yaml_file_path', $filepath);
+      $realpath = drupal_realpath($filepath);
+      $yaml = file_get_contents($filepath);
+      if (($library = libraries_load('spyc')) && !empty($library['loaded'])) {
+        $data = spyc_load($yaml);
+      }
+      else {
+        drupal_set_message(t("You haven't downloaded the spyc dependency for the banana dashbord."), 'error');
+      }
+    }
+    drupal_alter('banana_dashboard_settings', $data);
+  }
+  return $data;
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function banana_dashboard_libraries_info() {
+  $libraries['spyc'] = array(
+    'name' => 'Spyc',
+    'version' => '0.5.1',
+    'vendor url' => 'https://github.com/mustangostang/spyc',
+    'download url' => 'https://raw2.github.com/mustangostang/spyc/master/Spyc.php',
+    'version arguments' => array(
+      'file' => 'Spyc.php',
+      'pattern' => '@version\s+([0-9a-zA-Z\.-]+)@',
+    ),
+    'files' => array(
+      'php' => array('Spyc.php'),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_user_login().
+ *
+ * Redirect to dashboard.
+ */
+function banana_dashboard_user_login(&$edit, $account) {
+  $destinations = banana_dashboard_get('login_destination');
+
+  if (!empty($destinations)) {
+    foreach ($destinations as $d) {
+      $url = $d['url'];
+      if (isset($d['roles'])) {
+        foreach ($d['roles'] as $role) {
+          if (in_array($role, $account->roles)) {
+            $edit['redirect'] = $url;
+          }
+        }
+      }
+      else {
+        $edit['redirect'] = $url;
+      }
+    }
+  }
+}
