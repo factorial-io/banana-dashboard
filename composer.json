@@ -1,6 +1,6 @@
 {
   "name": "factorial-io/banana_dashboard",
   "description": "Dashboard with Icons for Drupal 7",
-  "type": "factorial-tools",
+  "type": "drupal-module",
   "license": "MIT"
 }
