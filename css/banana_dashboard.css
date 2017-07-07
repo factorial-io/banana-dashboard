@@ -1,0 +1,52 @@
+.banana-dashboard-menu-link {
+    min-height: 4px;
+    min-width: 4px;
+    width: 100px;
+    height: 40px;
+    background-position: center 5px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    padding: 60px 10px 10px 10px;
+    margin: 10px 20px;
+    border: 1px solid #efefef;
+    text-align: center;
+    text-decoration: none;
+    color: #333333;
+    text-transform: capitalize;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.banana-dashboard-menu-link:hover {
+    border: 1px solid #aadddd;
+    background-color: #efefef;
+}
+
+.banana_dashboard_menu {
+    list-style: none;
+}
+
+.banana_dashboard_menu li {
+    display: inline-block;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.navbar-menu-administration li.level-1.first a.icon:before,
+.icon-banana-dashboard:before {background-image: url(../icons/PNG/equalizer.png); background-size: 100%;}
+
+.dashboard-icon-file { background-image: url(../icons/PNG/file.png);}
+.dashboard-icon-bars { background-image: url(../icons/PNG/bars.png);}
+.dashboard-icon-pen { background-image: url(../icons/PNG/pen.png);}
+.dashboard-icon-hammer { background-image: url(../icons/PNG/hammer.png);}
+.dashboard-icon-menu { background-image: url(../icons/PNG/menu.png);}
+.dashboard-icon-profile { background-image: url(../icons/PNG/profile.png);}
+.dashboard-icon-users { background-image: url(../icons/PNG/users.png);}
+.dashboard-icon-bookmarks { background-image: url(../icons/PNG/bookmarks.png);}
+.dashboard-icon-numbered-list { background-image: url(../icons/PNG/numbered-list.png);}
+
+
+.banana-dashboard-font-size-small {
+    font-size: 10px;
+}
+

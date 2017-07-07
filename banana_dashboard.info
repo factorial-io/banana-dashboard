@@ -1,0 +1,10 @@
+name = Banana Dashboard
+description = "Dashboard so simple that even a monkey could use it"
+package = Administration
+core = 7.x
+
+configure = admin/config/administration/banana_dashboard
+
+dependencies[] = system (>7.10)
+dependencies[] = menu
+dependencies[] = libraries
