@@ -71,16 +71,16 @@ function banana_dashboard_page_callback() {
       unset($dashboard_menu[$key]);
     }
   }
-  $groups = banana_dashboard_get('dashboard_menu_groups', array('general'));
+  $groups = banana_dashboard_get('dashboard_menu_groups', array('System'));
   $menu_group = array();
   foreach ($groups as $group) {
     $menu_group[$group] = array();
   }
   foreach ($dashboard_menu as $menu) {
-    $group = isset($menu['group']) ? $menu['group'] : 'general';
-    $menu_group[$group] = $menu;
+    $group = isset($menu['group']) ? $menu['group'] : 'System';
+    $menu_group[$group][] = $menu;
   }
-  return theme('banana_dashboard', array('dashboard_menu' => $dashboard_menu));
+  return theme('banana_dashboard', array('dashboard_menu' => $menu_group));
 }
 
 /**

@@ -20,6 +20,7 @@
 .banana-dashboard-menu-link:hover {
     border: 1px solid #aadddd;
     background-color: #efefef;
+    cursor: pointer;
 }
 
 .banana_dashboard_menu {
