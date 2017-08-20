@@ -80,6 +80,11 @@ function banana_dashboard_page_callback() {
     $group = isset($menu['group']) ? $menu['group'] : 'System';
     $menu_group[$group][] = $menu;
   }
+  foreach ($menu_group as $group => $menu) {
+    if (empty($menu)) {
+      unset($menu_group[$group]);
+    }
+  }
   return theme('banana_dashboard', array('dashboard_menu' => $menu_group));
 }
 
