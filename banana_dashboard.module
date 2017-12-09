@@ -141,37 +141,11 @@ function banana_dashboard_load_config() {
       drupal_alter('banana_dashboard_yaml_file_path', $filepath);
       $realpath = drupal_realpath($filepath);
       $yaml = file_get_contents($filepath);
-      if (($library = libraries_load('spyc')) && !empty($library['loaded'])) {
-        $data = spyc_load($yaml);
-      }
-      else {
-        drupal_set_message(t("You haven't downloaded the spyc dependency for the banana dashbord."), 'error');
-      }
+      $data = yaml_parser_parse_string($yaml);
     }
     drupal_alter('banana_dashboard_settings', $data);
   }
   return $data;
-}
-
-/**
- * Implements hook_libraries_info().
- */
-function banana_dashboard_libraries_info() {
-  $libraries['spyc'] = array(
-    'name' => 'Spyc',
-    'version' => '0.5.1',
-    'vendor url' => 'https://github.com/mustangostang/spyc',
-    'download url' => 'https://raw2.github.com/mustangostang/spyc/master/Spyc.php',
-    'version arguments' => array(
-      'file' => 'Spyc.php',
-      'pattern' => '@version\s+([0-9a-zA-Z\.-]+)@',
-    ),
-    'files' => array(
-      'php' => array('Spyc.php'),
-    ),
-  );
-
-  return $libraries;
 }
 
 /**

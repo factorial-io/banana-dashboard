@@ -8,3 +8,4 @@ configure = admin/config/administration/banana_dashboard
 dependencies[] = system (>7.10)
 dependencies[] = menu
 dependencies[] = libraries
+dependencies[] = yaml_parser
