@@ -9,3 +9,4 @@ dependencies[] = system (>7.10)
 dependencies[] = menu
 dependencies[] = libraries
 dependencies[] = yaml_parser
+dependencies[] = fontawesome
