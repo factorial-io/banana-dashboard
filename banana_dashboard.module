@@ -76,8 +76,15 @@ function banana_dashboard_page_callback() {
   foreach ($groups as $group) {
     $menu_group[$group] = array();
   }
+
+  $legacy_icons_map = _banana_dashboard_legacy_icon_map();
+
   foreach ($dashboard_menu as $menu) {
     $group = isset($menu['group']) ? $menu['group'] : 'System';
+    // Replace the legacy icons with fa-icons.
+    if (isset($legacy_icons_map[$menu['icon']])) {
+      $menu['icon'] = $legacy_icons_map[$menu['icon']];
+    }
     $menu_group[$group][] = $menu;
   }
   foreach ($menu_group as $group => $menu) {
@@ -85,6 +92,7 @@ function banana_dashboard_page_callback() {
       unset($menu_group[$group]);
     }
   }
+
   return theme('banana_dashboard', array('dashboard_menu' => $menu_group));
 }
 
@@ -171,4 +179,21 @@ function banana_dashboard_user_login(&$edit, $account) {
       }
     }
   }
+}
+
+/**
+ * Legacy icon map to fontawesome.
+ */
+function _banana_dashboard_legacy_icon_map() {
+  return array(
+    "file" => "file-o",
+    "bars" => "bars",
+    "pen" => "pencil",
+    "hammer" => "gear",
+    "menu" => "bars",
+    "profile" => "user-o",
+    "users" => "users",
+    "bookmarks" => "bookmark",
+    "numbered-list" => "list",
+  );
 }
