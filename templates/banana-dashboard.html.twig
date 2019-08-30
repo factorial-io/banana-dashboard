@@ -1,7 +1,12 @@
+{#
 <div id="banana_dashboard">
+    <h4 class="label">{{ test_var }}</h4>
     {% for group in menu_group %}
     <div class="banana-dashboard-group banana-dashboard-group-group-{{ group }}">
         <h4 class="label">{{ group }}</h4>
     </div>
     {% endfor %}
-</div>
+</div>#}
+<ul>
+    {{ items }}
+</ul>
