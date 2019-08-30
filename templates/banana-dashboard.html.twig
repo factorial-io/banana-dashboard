@@ -1,12 +1,18 @@
-{#
 <div id="banana_dashboard">
-    <h4 class="label">{{ test_var }}</h4>
-    {% for group in menu_group %}
-    <div class="banana-dashboard-group banana-dashboard-group-group-{{ group }}">
-        <h4 class="label">{{ group }}</h4>
-    </div>
+    {% for group, menu_items in dashboard_menu %}
+        <div>
+            <h4>{{ group }}</h4>
+            <ul>
+                {% for menu_item in menu_items %}
+                <li>
+                    <a href=" ">
+                        <i>{{ menu_item['icon'] }}</i>
+                        <div>{{ menu_item['title'] }}</div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endfor %}
-</div>#}
-<ul>
-    {{ items }}
-</ul>
+</div>
+
