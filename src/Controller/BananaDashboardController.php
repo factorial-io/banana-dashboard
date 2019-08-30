@@ -21,7 +21,7 @@ class BananaDashboardController extends ControllerBase
      *   A simple renderable array.
      */
     public function getBananaDashboard() {
-        $path = drupal_get_path('module', 'banana_dashboard');
+        //$path = drupal_get_path('module', 'banana_dashboard');
         //drupal_add_css($path . '/css/banana_dashboard.css'); //TODO: Add css later
         $dashboard_menu = banana_dashboard_get('dashboard_menu', array());
         foreach ($dashboard_menu as $key => $value) {
@@ -29,13 +29,15 @@ class BananaDashboardController extends ControllerBase
                 unset($dashboard_menu[$key]);
             }
         }
+
+        $dashboard = banana_dashboard_get('dashboard', array());
         $groups = banana_dashboard_get('dashboard_menu_groups', array('System'));
         $menu_group = array();
         foreach ($groups as $group) {
             $menu_group[$group] = array();
         }
 
-        /*$legacy_icons_map = _banana_dashboard_legacy_icon_map();
+        $legacy_icons_map = _banana_dashboard_legacy_icon_map();
 
         foreach ($dashboard_menu as $menu) {
             $group = isset($menu['group']) ? $menu['group'] : 'System';
@@ -51,9 +53,11 @@ class BananaDashboardController extends ControllerBase
             if (empty($menu)) {
                 unset($menu_group[$group]);
             }
-        }*/
+        }
+        //kint($dashboard_menu);
         return array(
             '#theme' => 'banana_dashboard',
+            '#title' => $dashboard['title'],
             '#dashboard_menu' => $menu_group
         );
     }
