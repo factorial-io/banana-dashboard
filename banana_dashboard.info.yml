@@ -3,3 +3,6 @@ description: Dashboard so simple that even a monkey could use it.
 core: 8.x
 package: Administration
 type: module
+
+dependencies:
+  - fontawesome
