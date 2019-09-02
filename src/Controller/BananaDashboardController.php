@@ -21,8 +21,6 @@ class BananaDashboardController extends ControllerBase
      *   A simple renderable array.
      */
     public function getBananaDashboard() {
-        //$path = drupal_get_path('module', 'banana_dashboard');
-        //drupal_add_css($path . '/css/banana_dashboard.css'); //TODO: Add css later
         $dashboard_menu = banana_dashboard_get('dashboard_menu', array());
         foreach ($dashboard_menu as $key => $value) {
             if ($value['url'] == FALSE || !\Drupal::service('path.validator')->isValid(substr($value['url'], 1))) {
@@ -46,7 +44,7 @@ class BananaDashboardController extends ControllerBase
                 $menu['icon'] = $legacy_icons_map[$menu['icon']];
             }
             // Handle domain prefixes.
-            $menu['url'] = \Drupal\core\Url::fromRoute($menu['url']); //instead of url($menu['url']) in D7
+            $menu['url'] = (\Drupal\core\Url::fromRoute($menu['url']))->getRouteName();
             $menu_group[$group][] = $menu;
         }
         foreach ($menu_group as $group => $menu) {
@@ -54,7 +52,7 @@ class BananaDashboardController extends ControllerBase
                 unset($menu_group[$group]);
             }
         }
-        //kint($dashboard_menu);
+        //kint($menu_group);
         return array(
             '#theme' => 'banana_dashboard',
             '#title' => $dashboard['title'],
