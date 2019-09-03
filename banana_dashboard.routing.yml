@@ -4,4 +4,4 @@ banana_dashboard.banana_dash:
     _controller: '\Drupal\banana_dashboard\Controller\BananaDashboardController::getBananaDashboard'
     _title: 'Dashboard'
   requirements:
-    _permission: 'access content'
+    _permission: 'access banana dashboard'
