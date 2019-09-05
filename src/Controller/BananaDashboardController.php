@@ -52,7 +52,6 @@ class BananaDashboardController extends ControllerBase
                 unset($menu_group[$group]);
             }
         }
-        //kint($menu_group);
         return array(
             '#theme' => 'banana_dashboard',
             '#title' => $dashboard['title'],
