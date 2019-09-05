@@ -8,7 +8,13 @@
  */
 
 /**
+ *
  * Implements hook_theme().
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ * @return array
  */
 function banana_dashboard_theme($existing, $type, $theme, $path) {
     return array(
@@ -18,8 +24,13 @@ function banana_dashboard_theme($existing, $type, $theme, $path) {
     );
 }
 
+
 /**
+ *
  * Get one config value.
+ * @param $name
+ * @param null $default_value
+ * @return mixed|null
  */
 function banana_dashboard_get($name, $default_value = NULL) {
     $data = banana_dashboard_load_config();
