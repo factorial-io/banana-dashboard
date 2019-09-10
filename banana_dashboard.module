@@ -40,7 +40,7 @@ function banana_dashboard_get($name, $default_value = NULL) {
 /**
  * Load config from yml.
  */
-function banana_dashboard_load_config() {
+/*function banana_dashboard_load_config() {
     $data = &drupal_static(__FUNCTION__);
     if (!isset($data)) {
         $data = array();
@@ -57,12 +57,15 @@ function banana_dashboard_load_config() {
     }
     return $data;
 
-}
+}*/
 
-/*function banana_dashboard_load_config(){
+/**
+ * Load config from plugin manager.
+ */
+function banana_dashboard_load_config(){
     $data = \Drupal::service('plugin.manager.banana_dashboard')->getDefinitions();
     return $data;
-}*/
+}
 
 /**
  * Implements hook_user_login().
