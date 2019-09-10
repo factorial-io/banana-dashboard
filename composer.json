@@ -1,0 +1,14 @@
+{
+    "name": "drupal/banana_dashboard",
+    "description": "Expose simple dashboard for users with links to various section of the site",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Ashmika Hirani",
+            "email": "ashmika@factorial.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
