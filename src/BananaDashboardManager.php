@@ -20,14 +20,7 @@ class BananaDashboardManager extends DefaultPluginManager implements BananaDashb
    * @var array
    */
   protected $defaults = [
-    // Add required and optional plugin properties.
-    //'id' => '',
-    //'label' => '',
-     // 'url' => '',
-     // 'title' => '',
-    //  'access arguments' => '',
-    //  'dashboard_menu_groups' => [],
-     // 'dashboard_menu'=>[],
+
   ];
 
   /**
