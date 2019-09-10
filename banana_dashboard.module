@@ -59,6 +59,11 @@ function banana_dashboard_load_config() {
 
 }
 
+/*function banana_dashboard_load_config(){
+    $data = \Drupal::service('plugin.manager.banana_dashboard')->getDefinitions();
+    return $data;
+}*/
+
 /**
  * Implements hook_user_login().
  *
