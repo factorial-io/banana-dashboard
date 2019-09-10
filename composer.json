@@ -10,5 +10,8 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "vijaycs85/drupal-quality-checker": "dev-master"
+    }
 }
