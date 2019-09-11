@@ -22,6 +22,8 @@ class BananaDashboardController extends ControllerBase {
       if ($value['url'] == FALSE || !\Drupal::service('path.validator')->isValid(substr($value['url'], 1))) {
         unset($dashboard_menu[$key]);
       }
+      unset($dashboard_menu['id']);
+      unset($dashboard_menu['provider']);
     }
 
     $dashboard = banana_dashboard_get('dashboard', []);
