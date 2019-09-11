@@ -54,12 +54,9 @@ class BananaDashboardManager extends DefaultPluginManager implements BananaDashb
    */
   public function processDefinition(&$definition, $plugin_id) {
     parent::processDefinition($definition, $plugin_id);
-    unset($definition['id']);
-    unset($definition['provider']);
-
     // You can add validation of the plugin definition here.
     if (empty($definition['id'])) {
-      //throw new PluginException(sprintf('Example plugin property (%s) definition "is" is required.', $plugin_id));
+      throw new PluginException(sprintf('Example plugin property (%s) definition "is" is required.', $plugin_id));
     }
   }
 
