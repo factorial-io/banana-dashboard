@@ -12,7 +12,7 @@ use Drupal\Core\Plugin\Discovery\YamlDiscovery;
 /**
  * Provides the default banana_dashboard manager.
  */
-class BananaDashboardManager extends DefaultPluginManager implements BananaDashboardManagerInterface {
+class BananaDashboardManager extends DefaultPluginManager {
 
   /**
    * Provides default values for all banana_dashboard plugins.
@@ -58,5 +58,4 @@ class BananaDashboardManager extends DefaultPluginManager implements BananaDashb
     }
   }
 
-  // Add other methods here as defined in the BananaDashboardManagerInterface.
 }
