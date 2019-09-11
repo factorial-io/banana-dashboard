@@ -19,9 +19,7 @@ class BananaDashboardManager extends DefaultPluginManager implements BananaDashb
    *
    * @var array
    */
-  protected $defaults = [
-
-  ];
+  protected $defaults = [];
 
   /**
    * Constructs a new BananaDashboardManager object.
@@ -61,5 +59,4 @@ class BananaDashboardManager extends DefaultPluginManager implements BananaDashb
   }
 
   // Add other methods here as defined in the BananaDashboardManagerInterface.
-
 }
