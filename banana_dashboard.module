@@ -8,87 +8,53 @@
  */
 
 /**
- *
  * Implements hook_theme().
- * @param $existing
- * @param $type
- * @param $theme
- * @param $path
- * @return array
  */
 function banana_dashboard_theme($existing, $type, $theme, $path) {
-    return array(
-        'banana_dashboard' => array(
-            'variables' => array('title' => '', 'dashboard_menu' => '')
-        )
-    );
+  return [
+        'banana_dashboard' => [
+            'variables' => ['title' => '', 'dashboard_menu' => '']
+        ]
+  ];
 }
 
-
 /**
- *
  * Get one config value.
- * @param $name
+ *
+ * @param string $name
+ *   The key or title.
  * @param null $default_value
+ *   Default value.
+ *
  * @return mixed|null
+ *   Returns data.
  */
 function banana_dashboard_get($name, $default_value = NULL) {
-    $data = banana_dashboard_load_config();
-    return isset($data[$name]) ? $data[$name] : $default_value;
+  $data = banana_dashboard_load_config();
+  return isset($data[$name]) ? $data[$name] : $default_value;
 }
-
-/**
- * Load config from yml.
- */
-/*function banana_dashboard_load_config() {
-    $data = &drupal_static(__FUNCTION__);
-    if (!isset($data)) {
-        $data = array();
-        $path = drupal_get_path('module', 'banana_dashboard');
-        if ($path) {
-            $filepath = $path . '/banana_dashboard.yaml';
-            \Drupal::moduleHandler()->alter('banana_dashboard_yaml_file_path', $filepath);
-            $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager')->getViaUri($filepath);
-           // $realpath = $stream_wrapper_manager->realpath();
-            $yaml = file_get_contents($filepath);
-            $data = Symfony\Component\Yaml\Yaml::parse($yaml);
-        }
-        \Drupal::moduleHandler()->alter('banana_dashboard_settings', $data);
-    }
-    return $data;
-
-}*/
 
 /**
  * Load config from plugin manager.
  */
-function banana_dashboard_load_config(){
-    $data = \Drupal::service('plugin.manager.banana_dashboard')->getDefinitions();
-    return $data;
-}
-
-/**
- * Implements hook_user_login().
- *
- * Redirect to dashboard.
- */
-function banana_dashboard_user_login(&$edit, $account) {
-
+function banana_dashboard_load_config() {
+  $data = \Drupal::service('plugin.manager.banana_dashboard')->getDefinitions();
+  return $data;
 }
 
 /**
  * Legacy icon map to fontawesome.
  */
 function _banana_dashboard_legacy_icon_map() {
-    return array(
-        "file" => "file-o",
-        "bars" => "bars",
-        "pen" => "pencil",
-        "hammer" => "gear",
-        "menu" => "bars",
-        "profile" => "user-o",
-        "users" => "users",
-        "bookmarks" => "bookmark",
-        "numbered-list" => "list",
-    );
+  return [
+    "file" => "file-o",
+    "bars" => "bars",
+    "pen" => "pencil",
+    "hammer" => "gear",
+    "menu" => "bars",
+    "profile" => "user-o",
+    "users" => "users",
+    "bookmarks" => "bookmark",
+    "numbered-list" => "list",
+  ];
 }
